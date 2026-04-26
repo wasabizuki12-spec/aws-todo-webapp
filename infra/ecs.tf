@@ -105,7 +105,7 @@ resource "aws_ecs_task_definition" "webapp" {
       environment = [
         {
           name = "MYSQL_HOST"
-          value = "localhost"
+          value = "todo-webapp-dev-mysql-rds.cf4suw8ukwbh.ap-northeast-1.rds.amazonaws.com"
         },
         {
           name  = "MYSQL_USER"
@@ -122,24 +122,6 @@ resource "aws_ecs_task_definition" "webapp" {
         {
           name  = "MYSQL_SSL"
           value = "false"
-        }
-      ]
-      secrets = [
-        {
-          name      = "MYSQL_HOST"
-          valueFrom = "${aws_secretsmanager_secret.mysql.arn}:hostname::"
-        },
-        {
-          name      = "MYSQL_USER"
-          valueFrom = "${aws_secretsmanager_secret.mysql.arn}:username::"
-        },
-        {
-          name      = "MYSQL_PASSWORD"
-          valueFrom = "${aws_secretsmanager_secret.mysql.arn}:password::"
-        },
-        {
-          name      = "MYSQL_DATABASE"
-          valueFrom = "${aws_secretsmanager_secret.mysql.arn}:database::"
         }
       ]
       logConfiguration = {
